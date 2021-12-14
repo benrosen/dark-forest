@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ESNext"
+  },
+  "files": ["scripts/instantiate-root-stack.ts"]
+}

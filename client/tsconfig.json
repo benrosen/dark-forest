@@ -1,0 +1,7 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "outDir": "tsc.out",
+    "lib": ["DOM", "ES2015", "ScriptHost"]
+  }
+}
