@@ -2,9 +2,17 @@
 
 ## Package Scripts
 
+### `yarn build`
+
+Runs `yarn build` in the `client/` subdirectory.
+
 ### `yarn cdk`
 
 Runs `yarn cdk` in the `service/` subdirectory. For more information on the `cdk` command, consult the [AWS CDK CLI reference materials](https://docs.aws.amazon.com/cdk/latest/guide/cli.html).
+
+### `yarn deploy`
+
+Builds the code and then deploys CDK stacks.
 
 ## Links
 
