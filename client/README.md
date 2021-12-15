@@ -16,6 +16,7 @@ Uses [tsc]() to transpile TypeScript code into JavaScript according to the setti
 
 ## Reference
 
+- [follow-user-controlled-sprite](https://phaser.io/examples/v3/view/camera/follow-user-controlled-sprite)
 - https://angelo-poole.medium.com/2d-raycasting-in-javascript-91551c30355
 - https://github.com/Petah/2d-visibility
 - https://www.redblobgames.com/articles/visibility/
