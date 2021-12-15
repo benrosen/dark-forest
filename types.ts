@@ -1,3 +1,5 @@
+export type Circle = Circular & Positioned;
+
 interface Circular {
   radius: number;
 }
@@ -11,11 +13,16 @@ interface Healthy {
   health: number;
 }
 
+interface Identifiable {
+  id: string;
+}
+
 interface Illuminated {
   illuminated: boolean;
 }
 
-export type Player = Circular &
+export type Player = Identifiable &
+  Circular &
   Healthy &
   Illuminated &
   Positioned &
