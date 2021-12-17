@@ -1,5 +1,6 @@
 import * as Phaser from "phaser";
 
+import { AutoFilter, Noise } from "tone";
 import {
   Circle,
   Game,
@@ -115,6 +116,10 @@ const createGameClient = async (webSocketApiUrl: string) => {
   // } catch (error) {
   //   return handleAuthenticateError(error);
   // }
+
+  new Noise("brown")
+    .start()
+    .connect(new AutoFilter(0.05, 750).start().toDestination());
 
   const game = new Phaser.Game({
     backgroundColor: 0xd6ecef,
