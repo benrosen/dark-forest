@@ -1,17 +1,17 @@
 html,
 body {
-  background-color: black;
+  background-color: #101010;
   height: 100%;
   margin: 0;
 }
 
 header {
   width: 100%;
-  outline: 1px solid white;
+  outline: 1px solid #d6ecef;
 }
 
 h1 {
-  color: white;
+  color: #d6ecef;
   font-size: medium;
   margin: 0;
   padding: 0.5rem 0;
@@ -33,5 +33,5 @@ h1 {
 #game {
   display: flex;
   height: 300px;
-  outline: 1px solid white;
+  outline: 1px solid #d6ecef;
 }

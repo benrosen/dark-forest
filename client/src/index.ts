@@ -117,7 +117,7 @@ const createGameClient = async (webSocketApiUrl: string) => {
   // }
 
   const game = new Phaser.Game({
-    backgroundColor: 0xffffff,
+    backgroundColor: 0xd6ecef,
     height: "100%",
     parent: "game",
     scene: {
