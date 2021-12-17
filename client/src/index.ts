@@ -11,6 +11,7 @@ import {
 } from "../../types";
 
 import Sockette from "sockette";
+import { data } from "../package.json";
 
 const authenticate = async () => {
   // TODO implement
@@ -41,30 +42,6 @@ const connectToWebSocketApi = async (
     },
   };
 };
-
-const handleAuthenticateError = (error: Error) => {
-  // TODO implement
-  throw new Error("Not implemented.");
-};
-
-const handleConnectToWebSocketApiError = (error: Error) => {
-  // TODO implement
-  throw new Error("Not implemented.");
-};
-
-const handleWebSocketError = (event: Event) => console.error(event);
-
-const handleWebSocketClose = (event: CloseEvent) =>
-  console.info("WebSocket connection closed.");
-
-const handleWebSocketMaximum = (event: Event) =>
-  console.warn("WebSocket failed to reconnect; maximum retries exceeded.");
-
-const handleWebSocketOpen = (event: Event) =>
-  console.info("WebSocket connection opened.");
-
-const handleWebSocketReconnect = (event: Event) =>
-  console.info("WebSocket reconnected.");
 
 const sendWebSocketMessage = <T extends PointerDownMessage | PointerUpMessage>(
   client: WebSocketClient,
@@ -124,7 +101,7 @@ const createGameClient = async (webSocketApiUrl: string) => {
   const game = new Phaser.Game({
     backgroundColor: 0xd6ecef,
     height: "100%",
-    parent: "game",
+    parent: data.ids.GAME_CONTAINER,
     scene: {
       preload: async function (this: Phaser.Scene) {
         // DEBUG ONLY
@@ -147,13 +124,13 @@ const createGameClient = async (webSocketApiUrl: string) => {
         } as Game);
         //
         const webSocketClient = await connectToWebSocketApi(
-          handleWebSocketClose,
-          handleWebSocketError,
-          handleWebSocketMaximum,
+          () => {},
+          () => {},
+          () => {},
           (event: MessageEvent) =>
             game.events.emit(GAME_STATE_EVENT_NAME, event),
-          handleWebSocketOpen,
-          handleWebSocketReconnect,
+          () => {},
+          () => {},
           webSocketApiUrl
         );
         this.game.events.on(GAME_STATE_EVENT_NAME, (event: MessageEvent) => {
@@ -198,7 +175,7 @@ const createGameClient = async (webSocketApiUrl: string) => {
 };
 
 document.getElementsByTagName("button")[0].onclick = () =>
-  (document.getElementById("visible-before-first-touch").hidden = true) &&
-  !(document.getElementById("visible-after-first-touch").hidden = false) &&
+  (document.getElementById(data.ids.PRE_CLICK_CONTENT).hidden = true) &&
+  !(document.getElementById(data.ids.POST_CLICK_CONTENT).hidden = false) &&
   // TODO provide actual websocket url
-createGameClient("");
+  createGameClient("");

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "yarn transpile && yarn bundle && cp src/index.html dist/index.html && cp src/index.css dist/index.css",
+    "build": "yarn transpile && yarn bundle && ts-node src/html.ts > dist/index.html && ts-node src/css.ts > dist/ndex.css",
     "bundle": "esbuild tsc.out/client/src/index.js --bundle --minify --outfile=dist/index.js",
     "transpile": "tsc"
   },
@@ -13,5 +13,18 @@
     "esbuild": "^0.14.5",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
+  },
+  "data": {
+    "colors": {
+      "DARK": "#101010",
+      "LIGHT": "#d6ecef"
+    },
+    "ids": {
+      "CENTERED_CONTENT": "centered-content",
+      "GAME_CONTAINER": "game-container",
+      "POST_CLICK_CONTENT": "post-click-content",
+      "PRE_CLICK_CONTENT": "pre-click-content",
+      "VIEWPORT_CONTAINER": "viewport-container"
+    }
   }
 }
