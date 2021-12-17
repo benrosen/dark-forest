@@ -1,12 +1,13 @@
 {
   "scripts": {
     "build": "yarn transpile && yarn bundle && cp src/index.html dist/index.html && cp src/index.css dist/index.css",
-    "bundle": "esbuild tsc.out/client/src/index.js --bundle --minify --outfile=dist/index.js --sourcemap --target=chrome58,firefox57,safari11,edge16",
+    "bundle": "esbuild tsc.out/client/src/index.js --bundle --minify --outfile=dist/index.js",
     "transpile": "tsc"
   },
   "dependencies": {
     "phaser": "^3.55.2",
-    "sockette": "^2.0.6"
+    "sockette": "^2.0.6",
+    "tone": "^14.7.77"
   },
   "devDependencies": {
     "esbuild": "^0.14.5",
