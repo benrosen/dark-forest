@@ -174,23 +174,17 @@ const createGameClient = async (webSocketApiUrl: string) => {
         );
       },
       update: function (this: Phaser.Scene) {
-        // const clientId = this.data.get(CLIENT_ID_DATA_KEY) as string;
         const gameState = this.data.get(GAME_STATE_DATA_KEY) as Game;
         graphics = graphics ?? this.add.graphics();
         graphics.clear();
-        // const clientPlayer = gameState.players.find(
-        //   (player) => player.id === clientId
-        // );
-        const drawCircle = (circle: Circle) => {
-          graphics.fillStyle(0x000000, 1);
+        [...gameState.players, ...gameState.trees].forEach((circle: Circle) => {
+          graphics.fillStyle(0x101010, 1);
           graphics.fillCircle(
             circle.position.x,
             circle.position.y,
             circle.radius
           );
-        };
-        gameState.players.forEach((player) => drawCircle(player));
-        gameState.trees.forEach((tree) => drawCircle(tree));
+        });
         // TODO camera follow clientPlayer position
       },
     },
