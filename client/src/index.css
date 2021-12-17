@@ -35,3 +35,7 @@ h1 {
   height: 300px;
   outline: 1px solid #d6ecef;
 }
+
+#visible-before-first-touch {
+  text-align: center;
+}

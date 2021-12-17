@@ -197,4 +197,8 @@ const createGameClient = async (webSocketApiUrl: string) => {
   });
 };
 
+document.getElementsByTagName("button")[0].onclick = () =>
+  (document.getElementById("visible-before-first-touch").hidden = true) &&
+  !(document.getElementById("visible-after-first-touch").hidden = false) &&
+  // TODO provide actual websocket url
 createGameClient("");
