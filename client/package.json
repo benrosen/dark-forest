@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "build": "yarn transpile && yarn bundle && ts-node src/html.ts > dist/index.html && ts-node src/css.ts > dist/ndex.css",
+    "build": "yarn transpile && yarn bundle && yarn render",
     "bundle": "esbuild tsc.out/client/src/index.js --bundle --minify --outfile=dist/index.js",
+    "render": "ts-node src/html.ts > dist/index.html && ts-node src/css.ts > dist/ndex.css",
     "transpile": "tsc"
   },
   "dependencies": {
