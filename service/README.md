@@ -13,7 +13,7 @@ flowchart LR
 dist["../client/dist/"] --> s3 --> client
 ```
 
-The `../client/dist/` directory is published to an S3 bucket that is hosted via CloudFront and Route53 at https://darkforest.click.
+The `../client/dist/` directory is published to an S3 bucket that is hosted via CloudFront and Route53 at https://www.darkforest.click.
 
 ## multiplayer
 
