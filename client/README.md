@@ -4,11 +4,15 @@
 
 ### `yarn build`
 
-Transpiles and bundles TypeScript code into a distributable JavaScript file, which it places into the `/dist` directory alongside copies that it makes of `src/index.html` and `src/index.css`.
+Transpiles and bundles TypeScript code from `src/index.ts` into `dist/index.js` and renders `.css` and `.html` files into the `dist/` directory.
 
 ### `yarn bundle`
 
 Uses [esbuild]() to bundle transpiled JavaScript code with its dependencies into a single distributable JavaScript file.
+
+### `yarn render`
+
+Uses [ts-node]() to evaluate `src/html.ts` and `src/css.ts`, which are functions that return HTML and CSS code respectively. The results of these functions are output to corresponding `.html` and `.css` files in the `dist/` directory.
 
 ### `yarn transpile`
 
