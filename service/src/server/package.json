@@ -1,7 +1,9 @@
 {
   "data": {
-    "HERTZ": 10,
-    "PORT": 8080
+    "HERTZ": 1,
+    "PORT": 8080,
+    "PROXY": 49160,
+    "TAG": "wss-server"
   },
   "dependencies": {
     "ts-node": "^10.4.0",
@@ -14,6 +16,8 @@
     "@types/ws": "^8.2.2"
   },
   "scripts": {
-    "start": "ts-node index.ts"
+    "build": "docker build . -t $npm_package_data_TAG",
+    "start": "docker run -dp $npm_package_data_PROXY:$npm_package_data_PORT $npm_package_data_TAG",
+    "serve": "ts-node index.ts"
   }
 }
