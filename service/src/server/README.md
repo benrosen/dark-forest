@@ -1,5 +1,25 @@
 # server
 
+## data
+
+The `data` object in `package.json` contains configuration values for the application.
+
+### `HERTZ`
+
+Controls the number of times per second that the WebSocket server broadcasts state updates to clients.
+
+### `PORT`
+
+Defines the Docker port that WebSocket clients will connect to.
+
+### `PROXY`
+
+Defines the local port that exposes the Docker port.
+
+### `TAG`
+
+Identifies the Docker image.
+
 ## scripts
 
 ### `yarn build`
