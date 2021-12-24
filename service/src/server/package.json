@@ -2,7 +2,7 @@
   "data": {
     "HERTZ": 1,
     "PORT": 8080,
-    "PROXY": 8080,
+    "PROXY": 80,
     "TAG": "wss-server"
   },
   "dependencies": {
