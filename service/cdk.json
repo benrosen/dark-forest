@@ -15,6 +15,7 @@
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
     "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
     "containerPath": "src/server",
+    "containerPort": 8080,
     "domain": "darkforest.click",
     "subdomain": "www",
     "accountId": 326238338403

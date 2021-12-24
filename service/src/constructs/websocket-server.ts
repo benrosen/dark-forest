@@ -10,6 +10,7 @@ import { Vpc } from "@aws-cdk/aws-ec2";
 
 export interface WebSocketServerProps {
   containerPath: string;
+  containerPort: number;
 }
 
 export class WebSocketServer extends Construct {
@@ -23,6 +24,7 @@ export class WebSocketServer extends Construct {
       {
         cluster,
         taskImageOptions: {
+          containerPort: props.containerPort,
           image: ContainerImage.fromAsset(props.containerPath),
         },
       }

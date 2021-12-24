@@ -12,6 +12,7 @@ export default class Root extends Stack {
     });
     new WebSocketServer(this, "WebSocketServer", {
       containerPath: this.node.tryGetContext("containerPath"),
+      containerPort: this.node.tryGetContext("containerPort"),
     });
   }
 }
