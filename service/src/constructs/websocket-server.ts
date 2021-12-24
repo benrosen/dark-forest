@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+// Source example: https://github.com/aws-samples/aws-cdk-examples/blob/master/typescript/ecs/fargate-service-with-local-image/index.ts
+
 import { Cluster, ContainerImage } from "@aws-cdk/aws-ecs";
 import { Construct, Stack } from "@aws-cdk/core";
 
