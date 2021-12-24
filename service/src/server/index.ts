@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { RawData, WebSocket, WebSocketServer } from "ws";
 
 import { data } from "./package.json";
