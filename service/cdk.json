@@ -14,7 +14,7 @@
     "@aws-cdk/aws-efs:defaultEncryptionAtRest": true,
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
     "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
-    "containerPath": "../server",
+    "containerPath": "src/server",
     "domain": "darkforest.click",
     "subdomain": "www",
     "accountId": 326238338403
