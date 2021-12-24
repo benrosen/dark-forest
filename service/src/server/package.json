@@ -18,6 +18,6 @@
   "scripts": {
     "build": "docker build . -t $npm_package_data_TAG",
     "start": "docker run -dp $npm_package_data_PROXY:$npm_package_data_PORT $npm_package_data_TAG",
-    "serve": "ts-node index.ts"
+    "serve": "npx ts-node --transpile-only index.ts"
   }
 }
