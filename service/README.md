@@ -34,3 +34,6 @@ The `../client/dist/` directory is published to an S3 bucket that is hosted via 
 - https://docs.docker.com/get-started/02_our_app/
 - https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/ecs/fargate-service-with-local-image
 - https://medium.com/containers-on-aws/building-a-socket-io-chat-app-and-deploying-it-using-aws-fargate-86fd7cbce13f
+- https://stackoverflow.com/questions/67361936/exec-user-process-caused-exec-format-error-in-aws-fargate-service
+- https://github.com/aws/aws-cdk/issues/12472
+- https://github.com/aws/aws-cdk/issues/12472
