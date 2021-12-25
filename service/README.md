@@ -40,3 +40,8 @@ The `../client/dist/` directory is published to an S3 bucket that is hosted via 
 - https://stackoverflow.com/questions/44770254/ecs-service-other-than-http-keeps-restarting
 - https://stackoverflow.com/questions/45213473/aws-alb-health-check-pass-http-but-not-websocket
 - https://stackoverflow.com/questions/39336033/does-an-application-load-balancer-support-websockets
+- https://aws.amazon.com/premiumsupport/knowledge-center/elb-fix-failing-health-checks-alb/#:~:text=Success%20codes%20are%20the%20HTTP,that%20it's%20expecting%20to%20receive.
+- https://github.com/nathanpeck/socket.io-chat-fargate
+- https://stackoverflow.com/questions/48720949/secure-web-socket-wss-using-aws-load-balancer
+- https://cloudonaut.io/ecs-vs-fargate-whats-the-difference/
+- https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
