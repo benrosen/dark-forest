@@ -37,3 +37,6 @@ The `../client/dist/` directory is published to an S3 bucket that is hosted via 
 - https://stackoverflow.com/questions/67361936/exec-user-process-caused-exec-format-error-in-aws-fargate-service
 - https://github.com/aws/aws-cdk/issues/12472
 - https://github.com/aws/aws-cdk/issues/12472
+- https://stackoverflow.com/questions/44770254/ecs-service-other-than-http-keeps-restarting
+- https://stackoverflow.com/questions/45213473/aws-alb-health-check-pass-http-but-not-websocket
+- https://stackoverflow.com/questions/39336033/does-an-application-load-balancer-support-websockets
