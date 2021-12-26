@@ -5,6 +5,8 @@ import { RawData, WebSocket, WebSocketServer } from "ws";
 import { data } from "./package.json";
 import { v4 } from "uuid";
 
+const { port, hertz } = data.input;
+
 const state: {
   [clientId: string]: { data: RawData; isBinary: boolean };
 } = {};
@@ -13,7 +15,7 @@ console.log("Creating WebSocket server...");
 
 const server = new WebSocketServer({
   clientTracking: true,
-  port: data.PORT,
+  port,
 });
 
 console.log("WebSocket server created!");
@@ -38,4 +40,4 @@ setInterval(() => {
       client.readyState === WebSocket.OPEN && client.send(JSON.stringify(state))
   );
   console.log("broadcasted", state, "at", Date.now());
-}, 1000 / data.HERTZ);
+}, 1000 / hertz);
