@@ -16,8 +16,7 @@
     "@types/ws": "^8.2.2"
   },
   "scripts": {
-    "build": "docker build . -t $npm_package_data_TAG",
-    "start": "docker run -dp $npm_package_data_PROXY:$npm_package_data_PORT $npm_package_data_TAG",
+    "build": "npx ts-node scripts/render-dockerfile.ts > Dockerfile && docker build . -t $npm_package_data_input_tag",
     "serve": "npx ts-node --transpile-only index.ts"
   }
 }
