@@ -11,5 +11,5 @@ const env = {
   region: process.env.CDK_DEFAULT_REGION,
 };
 
-new WebSocketServerStack(app, "WebSocketServerStack", { env });
-new StaticSiteStack(app, "StaticSiteApp", { env });
+new WebSocketServerStack(app, "TDF_WebSocketServerStack", { env });
+new StaticSiteStack(app, "TDF_StaticSiteStack", { env });
