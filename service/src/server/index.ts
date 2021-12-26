@@ -34,7 +34,8 @@ server.on("connection", (client) => {
 
 setInterval(() => {
   server.clients.forEach(
-    (client) => client.readyState === WebSocket.OPEN && client.send(state)
+    (client) =>
+      client.readyState === WebSocket.OPEN && client.send(JSON.stringify(state))
   );
   console.log("broadcasted", state, "at", Date.now());
 }, 1000 / data.HERTZ);
