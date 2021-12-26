@@ -1,7 +1,1 @@
-{
-  "scripts": {
-    "build": "cd client && yarn build",
-    "cdk": "cd service && yarn cdk",
-    "deploy": "yarn build && yarn cdk deploy"
-  }
-}
+{}
