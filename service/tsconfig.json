@@ -3,5 +3,5 @@
     "moduleResolution": "node",
     "target": "ESNext"
   },
-  "files": ["scripts/instantiate-root-stack.ts"]
+  "files": ["scripts/construct-app-stacks.ts"]
 }
