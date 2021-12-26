@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { App } from "@aws-cdk/core";
-import StaticSiteStack from "../src/stacks/static-site-stack";
-import WebSocketServerStack from "../src/stacks/websocket-server-stack";
+import Client from "../src/stacks/client";
+import Service from "../src/stacks/service";
 
 const app = new App();
 
@@ -11,5 +11,5 @@ const env = {
   region: process.env.CDK_DEFAULT_REGION,
 };
 
-new WebSocketServerStack(app, "TDF_WebSocketServerStack", { env });
-new StaticSiteStack(app, "TDF_StaticSiteStack", { env });
+new Service(app, { env });
+new Client(app, { env });
