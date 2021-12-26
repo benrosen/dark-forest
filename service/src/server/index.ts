@@ -24,7 +24,7 @@ server.on("connection", (client) => {
   client
     .on("close", () => {
       console.log(clientId, "closed at", Date.now());
-      state[clientId] = undefined;
+      delete state[clientId];
     })
     .on("message", (data, isBinary) => {
       console.log(clientId, "sent", data, "at", Date.now());
