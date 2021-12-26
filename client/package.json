@@ -16,16 +16,22 @@
     "typescript": "^4.5.4"
   },
   "data": {
-    "colors": {
-      "DARK": "#101010",
-      "LIGHT": "#d6ecef"
-    },
-    "ids": {
-      "CENTERED_CONTENT": "centered-content",
-      "GAME_CONTAINER": "game-container",
-      "POST_CLICK_CONTENT": "post-click-content",
-      "PRE_CLICK_CONTENT": "pre-click-content",
-      "VIEWPORT_CONTAINER": "viewport-container"
+    "input": {
+      "colors": {
+        "dark": "#101010",
+        "light": "#d6ecef"
+      },
+      "ids": {
+        "centeredContent": "centered-content",
+        "gameContainer": "game-container",
+        "postClickContent": "post-click-content",
+        "preClickContent": "pre-click-content",
+        "viewportContainer": "viewport-container"
+      },
+      "urls": {
+        "client": "",
+        "server": ""
+      }
     }
   }
 }
