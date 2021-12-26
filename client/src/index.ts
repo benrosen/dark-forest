@@ -13,6 +13,8 @@ import {
 import Sockette from "sockette";
 import { data } from "../package.json";
 
+const { ids, urls } = data.input;
+
 const authenticate = async () => {
   // TODO implement
   throw new Error("Not implemented.");
@@ -101,7 +103,7 @@ const createGameClient = async (webSocketApiUrl: string) => {
   const game = new Phaser.Game({
     backgroundColor: 0xd6ecef,
     height: "100%",
-    parent: data.ids.GAME_CONTAINER,
+    parent: ids.gameContainer,
     scene: {
       preload: async function (this: Phaser.Scene) {
         // DEBUG ONLY
@@ -175,7 +177,7 @@ const createGameClient = async (webSocketApiUrl: string) => {
 };
 
 document.getElementsByTagName("button")[0].onclick = () =>
-  (document.getElementById(data.ids.PRE_CLICK_CONTENT).hidden = true) &&
-  !(document.getElementById(data.ids.POST_CLICK_CONTENT).hidden = false) &&
+  (document.getElementById(ids.preClickContent).hidden = true) &&
+  !(document.getElementById(ids.postClickContent).hidden = false) &&
   // TODO provide actual websocket url
-  createGameClient("");
+  createGameClient(urls.server);

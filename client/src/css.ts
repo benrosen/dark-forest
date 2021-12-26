@@ -1,10 +1,11 @@
 import { data } from "../package.json";
 
-(() =>
-  console.log(/* CSS */ `body,
+const { colors, ids } = data.input;
+
+console.log(/* CSS */ `body,
 html {
-    background-color: ${data.colors.DARK};
-    color: ${data.colors.LIGHT};
+    background-color: ${colors.dark};
+    color: ${colors.light};
     height: 100%;
     margin: 0;
 }
@@ -17,29 +18,29 @@ h1 {
 }
 
 header {
-    outline: 1px solid ${data.colors.LIGHT};
+    outline: 1px solid ${colors.light};
     width: 100%;
 }
 
-#${data.ids.CENTERED_CONTENT} {
+#${ids.centeredContent} {
     display: flex;
     flex-direction: column;
     width: 485px;
 }
 
-#${data.ids.GAME_CONTAINER} {
+#${ids.gameContainer} {
     display: flex;
     height: 300px;
-    outline: 1px solid ${data.colors.LIGHT}
+    outline: 1px solid ${colors.light}
 }
 
-#${data.ids.PRE_CLICK_CONTENT} {
+#${ids.preClickContent} {
     text-align: center;
 }
 
-#${data.ids.VIEWPORT_CONTAINER} {
+#${ids.viewportContainer} {
     align-items: center;
     display: flex;
     height: 100%;
     justify-content: center;
-}`))();
+}`);
