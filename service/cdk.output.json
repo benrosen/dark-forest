@@ -1,0 +1,10 @@
+{
+  "TheDarkForestStack": {
+    "StaticSiteBucket34E5D9AF": "www.darkforest.click",
+    "WebSocketServerFargateServiceServiceURL7A769823": "http://TheDa-WebSo-1V3MM7GSK93H2-947238773.us-east-1.elb.amazonaws.com",
+    "WebSocketServerFargateServiceLoadBalancerDNSB6DA8188": "TheDa-WebSo-1V3MM7GSK93H2-947238773.us-east-1.elb.amazonaws.com",
+    "StaticSite93C8948E": "https://www.darkforest.click",
+    "StaticSiteCertificateC32A8925": "arn:aws:acm:us-east-1:326238338403:certificate/255cf47c-049b-4a5a-8ba4-4dd50b912b49",
+    "StaticSiteDistributionId8C64EF2A": "EYK4IFWDEDJ12"
+  }
+}

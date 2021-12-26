@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "cdk": "cdk"
+    "deploy": "npx cdk deploy --require-approval never --outputs-file cdk.output.json",
+    "destroy": "npx cdk destroy"
   },
   "dependencies": {
     "@aws-cdk/aws-certificatemanager": "^1.135.0",
