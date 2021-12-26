@@ -1,9 +1,17 @@
 {
   "data": {
-    "HERTZ": 1,
-    "PORT": 8080,
-    "PROXY": 80,
-    "TAG": "wss-server"
+    "input": {
+      "hertz": 1,
+      "port": 8080,
+      "proxy": 80,
+      "tag": "wss-server"
+    },
+    "output": {
+      "urls": {
+        "server": "",
+        "client": ""
+      }
+    }
   },
   "dependencies": {
     "uuid": "^8.3.2",
@@ -15,6 +23,7 @@
   },
   "scripts": {
     "build": "npx ts-node scripts/render-dockerfile.ts > Dockerfile && docker build . -t $npm_package_data_input_tag",
+    "start": "docker run -dp $npm_package_input_data_proxy:$npm_package_input_data_port $npm_package_data_input_tag",
     "serve": "npx ts-node --transpile-only index.ts"
   }
 }
