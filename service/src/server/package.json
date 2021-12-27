@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "npx ts-node scripts/render-dockerfile.ts > Dockerfile && docker build . -t $npm_package_data_input_tag",
-    "start": "docker run -dp $npm_package_input_data_proxy:$npm_package_input_data_port $npm_package_data_input_tag",
+    "start": "docker run -dp $npm_package_data_input_proxy:$npm_package_data_input_port $npm_package_data_input_tag",
     "serve": "npx ts-node --transpile-only index.ts"
   }
 }
