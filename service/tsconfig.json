@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "target": "ESNext"
   },
   "files": ["scripts/construct-app-stacks.ts"]
