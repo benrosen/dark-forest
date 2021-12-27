@@ -1,4 +1,12 @@
 {
+  "data": {
+    "input": {
+      "stacks": {
+        "client": "TdfClientStack",
+        "service": "TdfServiceStack"
+      }
+    }
+  },
   "scripts": {
     "deploy": "npx cdk deploy --require-approval never --outputs-file cdk.output.json",
     "destroy": "npx cdk destroy"
