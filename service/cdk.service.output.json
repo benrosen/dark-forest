@@ -1,0 +1,6 @@
+{
+  "TdfServiceStack": {
+    "WebSocketServerFargateServiceServiceURL7A769823": "http://TdfSe-WebSo-CTPZ6I2LDU3T-975692473.us-east-1.elb.amazonaws.com",
+    "WebSocketServerFargateServiceLoadBalancerDNSB6DA8188": "TdfSe-WebSo-CTPZ6I2LDU3T-975692473.us-east-1.elb.amazonaws.com"
+  }
+}

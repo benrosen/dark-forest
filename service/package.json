@@ -8,7 +8,9 @@
     }
   },
   "scripts": {
-    "deploy": "npx cdk deploy --require-approval never --outputs-file cdk.output.json",
+    "deploy": "yarn deploy:service && yarn deploy:client",
+    "deploy:client": "npx cdk deploy $npm_package_data_input_stacks_client  --require-approval never --outputs-file cdk.client.output.json",
+    "deploy:service": "npx cdk deploy $npm_package_data_input_stacks_service --require-approval never --outputs-file cdk.service.output.json",
     "destroy": "npx cdk destroy"
   },
   "dependencies": {

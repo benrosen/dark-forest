@@ -1,0 +1,8 @@
+{
+  "TdfClientStack": {
+    "StaticSiteBucket34E5D9AF": "www.darkforest.click",
+    "StaticSite93C8948E": "https://www.darkforest.click",
+    "StaticSiteCertificateC32A8925": "arn:aws:acm:us-east-1:326238338403:certificate/79b300ec-8cb9-438f-89ff-3a1e8ceb0d12",
+    "StaticSiteDistributionId8C64EF2A": "E363S8FOOFQ33"
+  }
+}
