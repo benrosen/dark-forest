@@ -1,5 +1,9 @@
 {
   "license": "MIT",
+  "scripts": {
+    "deploy": "cd service && yarn deploy:service && cd .. && npx ts-node scripts/export-websocket-url-to-client.ts && cd client && yarn build && cd ../service && yarn deploy:client",
+    "destroy": "cd service && yarn destroy"
+  },
   "devDependencies": {
     "@types/node": "^17.0.5"
   }
