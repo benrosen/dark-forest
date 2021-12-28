@@ -1,183 +1,111 @@
-import * as Phaser from "phaser";
+import { Game as PhaserGame, Scene } from "phaser";
 
-import { AutoFilter, Noise } from "tone";
-import {
-  Circle,
-  Game,
-  PointerDownMessage,
-  PointerUpMessage,
-  Topic,
-  WebSocketClient,
-} from "../../types";
-
-import Sockette from "sockette";
 import { data } from "../package.json";
 
-const { ids, urls } = data.input;
+const { colors, hertz, ids, urls } = data.input;
 
-const authenticate = async () => {
-  // TODO implement
-  throw new Error("Not implemented.");
-};
+class Client {
+  public readonly publishPlayerState: (state: PlayerState) => void;
+  constructor(props: ClientProps) {
+    const socket = new WebSocket(props.webSocketUrl);
+    socket.onmessage = (event: MessageEvent) =>
+      props.onGameStateReceived(JSON.parse(event.data));
+    this.publishPlayerState = (state: PlayerState) =>
+      socket.send(JSON.stringify(state));
+  }
+}
 
-const connectToWebSocketApi = async (
-  onClose: (event: CloseEvent) => void,
-  onError: (event: Event) => void,
-  onMaximum: (event: Event) => void,
-  onMessage: (message: MessageEvent) => void,
-  onOpen: (event: Event) => void,
-  onReconnect: (event: Event) => void,
-  url: string
-): Promise<WebSocketClient> => {
-  // const webSocketClient = new Sockette(url, {
-  //   onclose: onClose,
-  //   onerror: onError,
-  //   onmaximum: onMaximum,
-  //   onmessage: onMessage,
-  //   onopen: onOpen,
-  //   onreconnect: onReconnect,
-  // });
-  return {
-    publish: (message: PointerDownMessage | PointerUpMessage) => {
-      console.log(message);
-      // webSocketClient.json(message);
-    },
-  };
-};
+interface ClientProps {
+  onGameStateReceived: (state: GameState) => void;
+  webSocketUrl: string;
+}
 
-const sendWebSocketMessage = <T extends PointerDownMessage | PointerUpMessage>(
-  client: WebSocketClient,
-  message: T
-) => client.publish(message);
-
-const sendPointerWebSocketMessage = <
-  T extends PointerUpMessage | PointerDownMessage
->(
-  client: WebSocketClient,
-  position: { x: number; y: number },
-  topic: Topic
-) =>
-  sendWebSocketMessage<T>(client, {
-    position: position,
-    timestamp: Date.now(),
-    topic: topic,
-  } as T);
-
-const sendPointerDownWebSocketMessage = (
-  client: WebSocketClient,
-  position: { x: number; y: number }
-) =>
-  sendPointerWebSocketMessage<PointerDownMessage>(
-    client,
-    position,
-    Topic.PointerDown
-  );
-
-const sendPointerUpWebSocketMessage = (
-  client: WebSocketClient,
-  position: { x: number; y: number }
-) =>
-  sendPointerWebSocketMessage<PointerDownMessage>(
-    client,
-    position,
-    Topic.PointerUp
-  );
-
-const createGameClient = async (webSocketApiUrl: string) => {
-  const GAME_STATE_EVENT_NAME = "GAME_STATE_EVENT";
-  const GAME_STATE_DATA_KEY = "GAME_STATE_DATA";
-  const CLIENT_ID_DATA_KEY = "CLIENT_ID_DATA_KEY";
-
-  let graphics: Phaser.GameObjects.Graphics;
-
-  // try {
-  //   await authenticate();
-  // } catch (error) {
-  //   return handleAuthenticateError(error);
-  // }
-
-  new Noise("brown")
-    .start()
-    .connect(new AutoFilter(0.05, 750).start().toDestination());
-
-  const game = new Phaser.Game({
-    backgroundColor: 0xd6ecef,
-    height: "100%",
-    parent: ids.gameContainer,
-    scene: {
-      preload: async function (this: Phaser.Scene) {
-        // DEBUG ONLY
-        this.data.set(GAME_STATE_DATA_KEY, {
-          players: [],
-          trees: [
-            { position: { x: 0, y: 120 }, radius: 9 },
-            { position: { x: 100, y: 330 }, radius: 10 },
-            { position: { x: 35, y: 110 }, radius: 4 },
-            { position: { x: 22, y: 230 }, radius: 8 },
-            { position: { x: 5, y: 213 }, radius: 15 },
-            { position: { x: 73, y: 396 }, radius: 12 },
-            { position: { x: 300, y: 200 }, radius: 9 },
-            { position: { x: 310, y: 50 }, radius: 10 },
-            { position: { x: 235, y: 10 }, radius: 4 },
-            { position: { x: 322, y: 30 }, radius: 8 },
-            { position: { x: 225, y: 13 }, radius: 15 },
-            { position: { x: 273, y: 96 }, radius: 12 },
-          ],
-        } as Game);
-        //
-        const webSocketClient = await connectToWebSocketApi(
-          () => {},
-          () => {},
-          () => {},
-          (event: MessageEvent) =>
-            game.events.emit(GAME_STATE_EVENT_NAME, event),
-          () => {},
-          () => {},
-          webSocketApiUrl
-        );
-        this.game.events.on(GAME_STATE_EVENT_NAME, (event: MessageEvent) => {
-          console.log(event);
-          // TODO parse event before setting
-          this.data.set(GAME_STATE_DATA_KEY, event);
-        });
-        this.input.on(
-          Phaser.Input.Events.POINTER_DOWN,
-          (pointer: Phaser.Input.Pointer) =>
-            sendPointerDownWebSocketMessage(webSocketClient, {
-              x: pointer.x,
-              y: pointer.y,
-            })
-        );
-        this.input.on(
-          Phaser.Input.Events.POINTER_UP,
-          (pointer: Phaser.Input.Pointer) =>
-            sendPointerUpWebSocketMessage(webSocketClient, {
-              x: pointer.x,
-              y: pointer.y,
-            })
-        );
+class Game {
+  private readonly _game: PhaserGame;
+  public set state(value: GameState) {
+    this._game.events.emit(GameEvent.GameStateChanged, value);
+  }
+  constructor(props: GameProps) {
+    this._game = new PhaserGame({
+      backgroundColor: props.darkColor,
+      fps: {
+        target: props.hertz,
+        forceSetTimeOut: true,
       },
-      update: function (this: Phaser.Scene) {
-        const gameState = this.data.get(GAME_STATE_DATA_KEY) as Game;
-        graphics = graphics ?? this.add.graphics();
-        graphics.clear();
-        [...gameState.players, ...gameState.trees].forEach((circle: Circle) => {
-          graphics.fillStyle(0x101010, 1);
-          graphics.fillCircle(
-            circle.position.x,
-            circle.position.y,
-            circle.radius
-          );
-        });
-        // TODO camera follow clientPlayer position
+      height: "100%",
+      parent: props.parentElementId,
+      scene: {
+        preload: async function (this: Scene) {
+          console.log("preload");
+        },
+        create: async function (this: Scene) {
+          console.log("create");
+        },
+        update: async function (this: Scene) {
+          console.log("update");
+        },
       },
-    },
-    width: "100%",
+      width: "100%",
+    });
+  }
+}
+
+class GameClient {
+  private readonly _client: Client;
+  private readonly _game: Game;
+  constructor(props: GameClientProps) {
+    this._client = new Client({
+      onGameStateReceived: (state: GameState) => (this._game.state = state),
+      webSocketUrl: props.webSocketUrl,
+    });
+    this._game = new Game({
+      darkColor: props.darkColor,
+      hertz: props.hertz,
+      lightColor: props.lightColor,
+      onLocalPlayerStateChanged: (state: PlayerState) =>
+        this._client.publishPlayerState(state),
+      parentElementId: props.parentElementId,
+    });
+  }
+}
+
+interface GameClientProps {
+  darkColor: number;
+  hertz: number;
+  lightColor: number;
+  parentElementId: string;
+  webSocketUrl: string;
+}
+
+enum GameEvent {
+  GameStateChanged = "GAME_STATE_CHANGED",
+}
+
+interface GameProps {
+  darkColor: number;
+  hertz: number;
+  lightColor: number;
+  onLocalPlayerStateChanged: (state: PlayerState) => void;
+  parentElementId: string;
+}
+
+interface GameState {
+  [playerId: string]: PlayerState;
+}
+
+interface PlayerState {}
+
+const getHexInteger = (hexString: string) =>
+  parseInt(hexString.replace(/^#/, ""), 16);
+
+document.onclick = () => {
+  document.getElementById(ids.preClickContent).hidden = true;
+  document.getElementById(ids.postClickContent).hidden = false;
+  new GameClient({
+    darkColor: getHexInteger(colors.dark),
+    hertz,
+    lightColor: getHexInteger(colors.light),
+    parentElementId: ids.gameContainer,
+    webSocketUrl: urls.server,
   });
 };
-
-document.getElementsByTagName("button")[0].onclick = () =>
-  (document.getElementById(ids.preClickContent).hidden = true) &&
-  !(document.getElementById(ids.postClickContent).hidden = false) &&
-  // TODO provide actual websocket url
-  createGameClient(urls.server);
