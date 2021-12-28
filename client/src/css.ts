@@ -10,6 +10,16 @@ html {
     margin: 0;
 }
 
+button {
+    background: none;
+    border: none;
+    color: ${colors.light};
+    font-family: "Courier New", Courier, monospace;
+    font-size: medium;
+    padding: 0;
+    margin: 0;
+}
+
 h1 {
     font-family: "Courier New", Courier, monospace;
     font-size: medium;
