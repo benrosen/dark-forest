@@ -13,6 +13,7 @@ html {
 h1 {
     font-family: "Courier New", Courier, monospace;
     font-size: medium;
+    font-weight: normal;
     margin: 0;
     padding: 0.5rem 0;
 }
