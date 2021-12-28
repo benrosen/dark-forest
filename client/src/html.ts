@@ -15,7 +15,7 @@ console.log(/* HTML */ `<!DOCTYPE html>
       <div id="${ids.viewportContainer}">
         <div id="${ids.centeredContent}">
           <div id="${ids.preClickContent}">
-            <button>Start</button>
+            <button>Enter</button>
           </div>
           <div hidden id="${ids.postClickContent}">
             <h1>EXT. SNOWY FOREST - NIGHT</h1>
