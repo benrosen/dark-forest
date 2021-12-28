@@ -2,6 +2,7 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn transpile && yarn bundle && yarn render",
+    "bundle": "esbuild tsc.out/src/index.js --bundle --minify --outfile=dist/index.js",
     "render": "ts-node src/html.ts > dist/index.html && ts-node src/css.ts > dist/index.css",
     "transpile": "tsc"
   },
