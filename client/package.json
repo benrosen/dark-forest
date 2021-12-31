@@ -34,6 +34,19 @@
         "preClickContent": "pre-click-content",
         "viewportContainer": "viewport-container"
       },
+      "trees": {
+        "horizontalSamples": 30,
+        "maxRadius": 14,
+        "minRadius": 8,
+        "randomSeed": "seed",
+        "sampleSpacing": 30,
+        "threshold": 0.5,
+        "verticalSamples": 30
+      },
+      "player": {
+        "radius": 8,
+        "speed": 50
+      },
       "urls": {
         "server": "ws://TdfSe-WebSo-CTPZ6I2LDU3T-975692473.us-east-1.elb.amazonaws.com"
       }
