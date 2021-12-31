@@ -95,8 +95,23 @@ interface GameState {
 
 interface PlayerState {}
 
+
+const clamp = (value: number, min = 0, max = 1) =>
+  Math.min(max, Math.max(min, value));
+
 const getHexInteger = (hexString: string) =>
   parseInt(hexString.replace(/^#/, ""), 16);
+
+const getTreeId = (point: Point) => `${point.x}x${point.y}`;
+
+const inverseLerp = (min: number, max: number, value: number) =>
+  clamp((value - min) / (max - min));
+
+const lerp = (min: number, max: number, interpolant: number) =>
+  min * (1 - interpolant) + max * interpolant;
+
+const roundToNearestMultiple = (value: number, multiple: number) =>
+  Math.round(value / multiple) * multiple;
 
 document.onclick = () => {
   document.onclick = undefined;
