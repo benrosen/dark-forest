@@ -99,6 +99,7 @@ const getHexInteger = (hexString: string) =>
   parseInt(hexString.replace(/^#/, ""), 16);
 
 document.onclick = () => {
+  document.onclick = undefined;
   document.getElementById(ids.preClickContent).hidden = true;
   document.getElementById(ids.postClickContent).hidden = false;
   new GameClient({
