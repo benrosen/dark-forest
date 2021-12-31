@@ -37,7 +37,6 @@ h1 {
 #${ids.gameContainer} {
     display: flex;
     height: 300px;
-    outline: 1px solid ${colors.light}
 }
 
 #${ids.preClickContent} {
