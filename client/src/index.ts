@@ -102,9 +102,9 @@ document.onclick = () => {
   document.getElementById(ids.preClickContent).hidden = true;
   document.getElementById(ids.postClickContent).hidden = false;
   new GameClient({
-    darkColor: getHexInteger(colors.dark),
+    darkColor: getHexInteger(colors.primary),
     hertz,
-    lightColor: getHexInteger(colors.light),
+    lightColor: getHexInteger(colors.secondary),
     parentElementId: ids.gameContainer,
     webSocketUrl: urls.server,
   });

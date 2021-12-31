@@ -22,8 +22,9 @@
   "data": {
     "input": {
       "colors": {
-        "dark": "#101010",
-        "light": "#d6ecef"
+        "primary": "#d6ecef",
+        "debug": "#00ff00",
+        "secondary": "#101010"
       },
       "hertz": 12,
       "ids": {

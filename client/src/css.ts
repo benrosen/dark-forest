@@ -4,8 +4,8 @@ const { colors, ids } = data.input;
 
 console.log(/* CSS */ `body,
 html {
-    background-color: ${colors.dark};
-    color: ${colors.light};
+    background-color: ${colors.secondary};
+    color: ${colors.primary};
     height: 100%;
     margin: 0;
 }
@@ -13,7 +13,7 @@ html {
 button {
     background: none;
     border: none;
-    color: ${colors.light};
+    color: ${colors.primary};
     font-family: "Courier New", Courier, monospace;
     font-size: medium;
     padding: 0;
