@@ -28,11 +28,6 @@ h1 {
     padding: 0.5rem 0;
 }
 
-header {
-    outline: 1px solid ${colors.light};
-    width: 100%;
-}
-
 #${ids.centeredContent} {
     display: flex;
     flex-direction: column;
