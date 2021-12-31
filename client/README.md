@@ -26,3 +26,6 @@ Uses [tsc]() to transpile TypeScript code into JavaScript according to the setti
 - https://www.redblobgames.com/articles/visibility/
 - https://ncase.me/sight-and-light/
 - https://simblob.blogspot.com/2012/07/2d-visibility.html
+- http://phaser.io/examples/v3/view/camera/follow-user-controlled-sprite
+- http://phaser.io/examples/v3/view/physics/arcade/add-body-to-shape
+- https://photonstorm.github.io/phaser3-docs/Phaser.Types.Scenes.html#.SettingsConfig
