@@ -36,10 +36,11 @@ class Game {
       },
       height: "100%",
       parent: props.parentElementId,
-      scene: {
-        preload: async function (this: Scene) {
-          console.log("preload");
-        },
+      physics: {
+        default: "arcade",
+      },
+      pixelArt: true,
+      roundPixels: true,
       scene: [Scene],
       width: "100%",
     });
