@@ -1,6 +1,7 @@
 {
   "include": ["src"],
   "compilerOptions": {
+    "esModuleInterop": true,
     "lib": ["DOM", "ES2015", "ScriptHost"],
     "outDir": "tsc.out",
     "resolveJsonModule": true,
