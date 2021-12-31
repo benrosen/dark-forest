@@ -1,8 +1,10 @@
-import { Game as PhaserGame, Scene } from "phaser";
+import { Game as PhaserGame, Scene as PhaserScene, Physics } from "phaser";
 
+import SimplexNoise from "simplex-noise";
 import { data } from "../package.json";
+import { v4 } from "uuid";
 
-const { colors, hertz, ids, urls } = data.input;
+const { colors, hertz, ids, player, trees, urls } = data.input;
 
 class Client {
   public readonly publishPlayerState: (state: PlayerState) => void;
@@ -38,13 +40,7 @@ class Game {
         preload: async function (this: Scene) {
           console.log("preload");
         },
-        create: async function (this: Scene) {
-          console.log("create");
-        },
-        update: async function (this: Scene) {
-          console.log("update");
-        },
-      },
+      scene: [Scene],
       width: "100%",
     });
   }
@@ -95,6 +91,127 @@ interface GameState {
 
 interface PlayerState {}
 
+interface Point {
+  x: number;
+  y: number;
+}
+
+type Sample = Point & { value: number };
+
+class Scene extends PhaserScene {
+  private get _body() {
+    return this._player.body as Phaser.Physics.Arcade.Body;
+  }
+  private _cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+  private _debug: Phaser.GameObjects.Graphics;
+  private _noise: SimplexNoise;
+  private _player: Phaser.GameObjects.Arc;
+  private _trees: Sample[] = [];
+  private _treeGroup: Physics.Arcade.StaticGroup;
+  private set trees(value: Sample[]) {
+    // create new trees
+    value
+      .filter((tree) => !this._trees.includes(tree))
+      .forEach((tree) => {
+        const treeCircle = this.add.circle(
+          tree.x,
+          tree.y,
+          lerp(
+            trees.minRadius,
+            trees.maxRadius,
+            inverseLerp(trees.threshold, 1, tree.value)
+          ),
+          getHexInteger(colors.secondary)
+        );
+        treeCircle.setName(getTreeId(tree));
+        this._treeGroup.add(treeCircle);
+      });
+    this._trees
+      .filter((tree) => !value.includes(tree))
+      .forEach((tree) => this.children.getByName(getTreeId(tree)).destroy());
+    this._trees = value;
+  }
+  constructor() {
+    super({
+      key: v4(),
+      active: true,
+    });
+  }
+  create() {
+    this._noise = new SimplexNoise(trees.randomSeed);
+    this._cursorKeys = this.input.keyboard.createCursorKeys();
+    this._debug = this.add.graphics({
+      lineStyle: {
+        alpha: 1,
+        color: getHexInteger(colors.debug),
+        width: 1,
+      },
+    });
+    this._player = this.add.circle(
+      0,
+      0,
+      player.radius,
+      getHexInteger(colors.secondary)
+    );
+    this.physics.add.existing(this._player, false);
+    this._treeGroup = this.physics.add.staticGroup({ randomKey: true });
+    this.cameras.main.startFollow(this._player, true, 0.5, 0.5);
+  }
+  update() {
+    this._body.setVelocity(0);
+    if (this._cursorKeys.left.isDown) {
+      this._body.setVelocityX(-player.speed);
+    } else if (this._cursorKeys.right.isDown) {
+      this._body.setVelocityX(player.speed);
+    }
+    if (this._cursorKeys.up.isDown) {
+      this._body.setVelocityY(-player.speed);
+    } else if (this._cursorKeys.down.isDown) {
+      this._body.setVelocityY(player.speed);
+    }
+    const nearestSamplePoint = {
+      x:
+        roundToNearestMultiple(this._body.position.x, trees.sampleSpacing) +
+        player.radius,
+      y:
+        roundToNearestMultiple(this._body.position.y, trees.sampleSpacing) +
+        player.radius,
+    };
+    const topLeftSamplePoint = {
+      x:
+        nearestSamplePoint.x -
+        trees.sampleSpacing * (trees.horizontalSamples / 2),
+      y:
+        nearestSamplePoint.y -
+        trees.sampleSpacing * (trees.verticalSamples / 2),
+    };
+    const samples: (Point & { value: number })[] = [];
+    for (let x = 0; x < trees.horizontalSamples; x++) {
+      for (let y = 0; y < trees.verticalSamples; y++) {
+        const point = {
+          x: topLeftSamplePoint.x + x * trees.sampleSpacing,
+          y: topLeftSamplePoint.y + y * trees.sampleSpacing,
+        };
+        samples.push({
+          x: point.x,
+          y: point.y,
+          value: this._noise.noise2D(point.x, point.y),
+        });
+      }
+    }
+
+    this.trees = samples.filter((sample) => sample.value >= trees.threshold);
+
+    this.physics.world.collide(this._player, this._treeGroup);
+
+    this._debug.clear();
+
+    // pool of tree game objects that can be reused?
+
+    // broadcast new player position
+    // props.onLocalPlayerStateChanged(this._body.position)
+  }
+}
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.min(max, Math.max(min, value));
