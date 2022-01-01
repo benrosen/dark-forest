@@ -16,6 +16,7 @@ class Client {
     socket.onmessage = (event: MessageEvent) =>
       props.onGameStateReceived(JSON.parse(event.data));
     this.publishPlayerState = (state: PlayerState) =>
+      socket.readyState === WebSocketReadyState.Open &&
       socket.send(JSON.stringify(state));
   }
 }
