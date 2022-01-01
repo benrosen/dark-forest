@@ -48,6 +48,10 @@ class Game {
       scene: [Scene],
       width: "100%",
     });
+    this._game.events.on(
+      GameEvent.LocalPlayerStateChanged,
+      (state: PlayerState) => props.onLocalPlayerStateChanged(state)
+    );
   }
 }
 
@@ -80,6 +84,7 @@ interface GameClientProps {
 
 enum GameEvent {
   GameStateChanged = "GAME_STATE_CHANGED",
+  LocalPlayerStateChanged = "LOCAL_PLAYER_STATE_CHANGED",
 }
 
 interface GameProps {
@@ -114,7 +119,6 @@ class Scene extends PhaserScene {
   private _trees: Sample[] = [];
   private _treeGroup: Physics.Arcade.StaticGroup;
   private set trees(value: Sample[]) {
-    // create new trees
     value
       .filter((tree) => !this._trees.includes(tree))
       .forEach((tree) => {
@@ -215,13 +219,12 @@ class Scene extends PhaserScene {
 
     this._debug.clear();
 
-    // TODO pool of tree game objects that can be reused?
-
-    // TODO broadcast new player position
-    // props.onLocalPlayerStateChanged(this._body.position)
-
-    // TODO draw remote players
+    this.game.events.emit(GameEvent.LocalPlayerStateChanged, {
+      x: this._body.position.x,
+      y: this._body.position.y,
+    } as PlayerState);
   }
+}
 
 enum WebSocketReadyState {
   Connecting = 0,
