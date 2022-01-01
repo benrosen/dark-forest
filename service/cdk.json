@@ -14,10 +14,11 @@
     "@aws-cdk/aws-efs:defaultEncryptionAtRest": true,
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
     "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "accountId": 326238338403,
+    "apiSubDomain": "api",
     "containerPath": "src/server",
     "containerPort": 8080,
     "domain": "darkforest.click",
-    "subdomain": "www",
-    "accountId": 326238338403
+    "subdomain": "www"
   }
 }
