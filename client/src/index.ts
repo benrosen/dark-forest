@@ -217,6 +217,12 @@ class Scene extends PhaserScene {
 
     // TODO draw remote players
   }
+
+enum WebSocketReadyState {
+  Connecting = 0,
+  Open = 1,
+  Closing = 2,
+  Closed = 3,
 }
 
 const clamp = (value: number, min = 0, max = 1) =>
