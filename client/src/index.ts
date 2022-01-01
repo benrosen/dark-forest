@@ -161,6 +161,10 @@ class Scene extends PhaserScene {
     this.physics.add.existing(this._player, false);
     this._treeGroup = this.physics.add.staticGroup({ randomKey: true });
     this.cameras.main.startFollow(this._player, true, 0.5, 0.5);
+    this.game.events.on(GameEvent.GameStateChanged, (state: GameState) => {
+      // handle game state change
+      console.log(state);
+    });
   }
   update() {
     this._body.setVelocity(0);
