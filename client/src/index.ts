@@ -6,6 +6,9 @@ import { v4 } from "uuid";
 
 const { colors, hertz, ids, player, trees, urls } = data.input;
 
+// TODO wind and footstep SFX
+// TODO flashlight beam
+// TODO flashlight toggle SFX
 class Client {
   public readonly publishPlayerState: (state: PlayerState) => void;
   constructor(props: ClientProps) {
@@ -207,10 +210,12 @@ class Scene extends PhaserScene {
 
     this._debug.clear();
 
-    // pool of tree game objects that can be reused?
+    // TODO pool of tree game objects that can be reused?
 
-    // broadcast new player position
+    // TODO broadcast new player position
     // props.onLocalPlayerStateChanged(this._body.position)
+
+    // TODO draw remote players
   }
 }
 
