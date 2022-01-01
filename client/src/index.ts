@@ -93,7 +93,7 @@ interface GameState {
   [playerId: string]: PlayerState;
 }
 
-interface PlayerState {}
+type PlayerState = Point;
 
 interface Point {
   x: number;
