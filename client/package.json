@@ -7,6 +7,7 @@
     "transpile": "tsc"
   },
   "dependencies": {
+    "buffer": "^6.0.3",
     "phaser": "^3.55.2",
     "simplex-noise": "^3.0.0",
     "sockette": "^2.0.6",

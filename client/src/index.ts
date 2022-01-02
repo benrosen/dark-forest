@@ -1,5 +1,6 @@
 import { Game as PhaserGame, Scene as PhaserScene, Physics } from "phaser";
 
+import { Buffer } from "buffer";
 import SimplexNoise from "simplex-noise";
 import { data } from "../package.json";
 import { v4 } from "uuid";
