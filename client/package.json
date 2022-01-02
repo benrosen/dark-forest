@@ -23,7 +23,7 @@
     "input": {
       "colors": {
         "primary": "#d6ecef",
-        "debug": "#00ff00",
+        "debug": "#ff00ff",
         "secondary": "#101010"
       },
       "hertz": 12,
