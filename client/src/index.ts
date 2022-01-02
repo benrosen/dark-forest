@@ -102,6 +102,8 @@ interface GameState {
 
 type PlayerState = Point;
 
+type RemotePlayerState = PlayerState & { id: string };
+
 interface Point {
   x: number;
   y: number;
@@ -119,6 +121,41 @@ class Scene extends PhaserScene {
   private _player: Phaser.GameObjects.Arc;
   private _trees: Sample[] = [];
   private _treeGroup: Physics.Arcade.StaticGroup;
+  private _remotePlayerStates: RemotePlayerState[] = [];
+  private _remotePlayerGroup: Physics.Arcade.Group;
+  private set remotePlayerStates(value: RemotePlayerState[]) {
+    value
+      .filter(
+        (remotePlayer) => !this._remotePlayerStates.includes(remotePlayer)
+      )
+      .forEach((remotePlayerToCreate) =>
+        this._remotePlayerGroup.add(
+          this.add
+            .circle(
+              remotePlayerToCreate.x,
+              remotePlayerToCreate.y,
+              player.radius,
+              getHexInteger(colors.secondary)
+            )
+            .setName(remotePlayerToCreate.id)
+        )
+      );
+    this._remotePlayerStates
+      .filter((remotePlayer) => !value.includes(remotePlayer))
+      .forEach((remotePlayerToDelete) =>
+        this.children.getByName(remotePlayerToDelete.id).destroy()
+      );
+    value
+      .filter((remotePlayer) => this._remotePlayerStates.includes(remotePlayer))
+      .forEach((remotePlayerToUpdate) =>
+        this.physics.moveTo(
+          this.children.getByName(remotePlayerToUpdate.id),
+          remotePlayerToUpdate.x,
+          remotePlayerToUpdate.y
+        )
+      );
+    this._remotePlayerStates = value;
+  }
   private set trees(value: Sample[]) {
     value
       .filter((tree) => !this._trees.includes(tree))
@@ -164,12 +201,21 @@ class Scene extends PhaserScene {
       getHexInteger(colors.secondary)
     );
     this.physics.add.existing(this._player, false);
+    this._remotePlayerGroup = this.physics.add.group({ randomKey: true });
     this._treeGroup = this.physics.add.staticGroup({ randomKey: true });
     this.cameras.main.startFollow(this._player, true, 0.5, 0.5);
-    this.game.events.on(GameEvent.GameStateChanged, (state: GameState) => {
-      // handle game state change
-      console.log(state);
-    });
+    this.game.events.on(
+      GameEvent.GameStateChanged,
+      (state: GameState) =>
+        (this.remotePlayerStates = Object.keys(state).map((clientId) => ({
+          id: clientId,
+          ...(JSON.parse(
+            Buffer.from(
+              (state[clientId] as unknown as any).data.data
+            ).toString()
+          ) as PlayerState),
+        })))
+    );
   }
   update() {
     this._body.setVelocity(0);
