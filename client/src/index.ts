@@ -7,8 +7,12 @@ import { v4 } from "uuid";
 
 const { colors, hertz, ids, player, trees, urls } = data.input;
 
+// BUG have to go to api.darkforest.click (unsafe) and proceed. then websocket connection will work.
+// BUG remote players are not drawn at the same position as they would be if they were local players (see screenshot)
+// TODO move position smoothly (remote player objects)
+// TODO document; publish docs to github pages
 // TODO wind and footstep SFX
-// TODO flashlight beam
+// TODO flashlight beams
 // TODO flashlight toggle SFX
 class Client {
   public readonly publishPlayerState: (state: PlayerState) => void;
@@ -263,13 +267,9 @@ class Scene extends PhaserScene {
         });
       }
     }
-
     this.trees = samples.filter((sample) => sample.value >= trees.threshold);
-
     this.physics.world.collide(this._player, this._treeGroup);
-
     this._debug.clear();
-
     this.game.events.emit(GameEvent.LocalPlayerStateChanged, {
       x: this._body.position.x,
       y: this._body.position.y,
