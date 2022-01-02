@@ -1,17 +1,10 @@
 {
-  "license": "MIT",
   "data": {
     "input": {
       "hertz": 12,
       "port": 8080,
       "proxy": 80,
       "tag": "wss-server"
-    },
-    "output": {
-      "urls": {
-        "server": "",
-        "client": ""
-      }
     }
   },
   "dependencies": {
@@ -22,6 +15,7 @@
     "@types/uuid": "^8.3.3",
     "@types/ws": "^8.2.2"
   },
+  "license": "MIT",
   "scripts": {
     "build": "npx ts-node scripts/render-dockerfile.ts > Dockerfile && docker build . -t $npm_package_data_input_tag",
     "start": "docker run -dp $npm_package_data_input_proxy:$npm_package_data_input_port $npm_package_data_input_tag",

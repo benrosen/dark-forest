@@ -1,25 +1,4 @@
 {
-  "license": "MIT",
-  "scripts": {
-    "build": "yarn transpile && yarn bundle && yarn render",
-    "bundle": "esbuild tsc.out/src/index.js --bundle --minify --outfile=dist/index.js",
-    "render": "ts-node src/html.ts > dist/index.html && ts-node src/css.ts > dist/index.css",
-    "transpile": "tsc"
-  },
-  "dependencies": {
-    "buffer": "^6.0.3",
-    "phaser": "^3.55.2",
-    "simplex-noise": "^3.0.0",
-    "sockette": "^2.0.6",
-    "tone": "^14.7.77",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@types/uuid": "^8.3.3",
-    "esbuild": "^0.14.5",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
-  },
   "data": {
     "input": {
       "colors": {
@@ -35,6 +14,10 @@
         "preClickContent": "pre-click-content",
         "viewportContainer": "viewport-container"
       },
+      "player": {
+        "radius": 8,
+        "speed": 50
+      },
       "trees": {
         "horizontalSamples": 30,
         "maxRadius": 14,
@@ -44,13 +27,30 @@
         "threshold": 0.5,
         "verticalSamples": 30
       },
-      "player": {
-        "radius": 8,
-        "speed": 50
-      },
       "urls": {
         "server": "wss://api.darkforest.click"
       }
     }
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "phaser": "^3.55.2",
+    "simplex-noise": "^3.0.0",
+    "sockette": "^2.0.6",
+    "tone": "^14.7.77",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.3",
+    "esbuild": "^0.14.5",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn transpile && yarn bundle && yarn render",
+    "bundle": "esbuild tsc.out/src/index.js --bundle --minify --outfile=dist/index.js",
+    "render": "ts-node src/html.ts > dist/index.html && ts-node src/css.ts > dist/index.css",
+    "transpile": "tsc"
   }
 }
