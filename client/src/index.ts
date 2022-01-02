@@ -159,23 +159,27 @@ class Scene extends PhaserScene {
   private set trees(value: Sample[]) {
     value
       .filter((tree) => !this._trees.includes(tree))
-      .forEach((tree) => {
-        const treeCircle = this.add.circle(
-          tree.x,
-          tree.y,
-          lerp(
-            trees.minRadius,
-            trees.maxRadius,
-            inverseLerp(trees.threshold, 1, tree.value)
-          ),
-          getHexInteger(colors.secondary)
-        );
-        treeCircle.setName(getTreeId(tree));
-        this._treeGroup.add(treeCircle);
-      });
+      .forEach((treeToCreate) =>
+        this._treeGroup.add(
+          this.add
+            .circle(
+              treeToCreate.x,
+              treeToCreate.y,
+              lerp(
+                trees.minRadius,
+                trees.maxRadius,
+                inverseLerp(trees.threshold, 1, treeToCreate.value)
+              ),
+              getHexInteger(colors.secondary)
+            )
+            .setName(getTreeId(treeToCreate))
+        )
+      );
     this._trees
       .filter((tree) => !value.includes(tree))
-      .forEach((tree) => this.children.getByName(getTreeId(tree)).destroy());
+      .forEach((treeToDestroy) =>
+        this.children.getByName(getTreeId(treeToDestroy)).destroy()
+      );
     this._trees = value;
   }
   constructor() {
