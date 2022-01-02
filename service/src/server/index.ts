@@ -23,9 +23,17 @@ console.log("WebSocket server created!");
 server.on("connection", (client) => {
   const clientId = v4();
   console.log(clientId, "connected at", Date.now());
+  const timer = setInterval(() => {
+    const payload = { ...state };
+    delete payload[clientId];
+    client.readyState === WebSocket.OPEN &&
+      client.send(JSON.stringify(payload));
+    console.log("sent", payload, "to", clientId, "at", Date.now());
+  }, 1000 / hertz);
   client
     .on("close", () => {
       console.log(clientId, "closed at", Date.now());
+      clearInterval(timer);
       delete state[clientId];
     })
     .on("message", (data, isBinary) => {
@@ -33,11 +41,3 @@ server.on("connection", (client) => {
       state[clientId] = { data, isBinary };
     });
 });
-
-setInterval(() => {
-  server.clients.forEach(
-    (client) =>
-      client.readyState === WebSocket.OPEN && client.send(JSON.stringify(state))
-  );
-  console.log("broadcasted", state, "at", Date.now());
-}, 1000 / hertz);
