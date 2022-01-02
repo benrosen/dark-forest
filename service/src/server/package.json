@@ -2,7 +2,7 @@
   "license": "MIT",
   "data": {
     "input": {
-      "hertz": 1,
+      "hertz": 12,
       "port": 8080,
       "proxy": 80,
       "tag": "wss-server"
