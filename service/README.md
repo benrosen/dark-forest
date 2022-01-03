@@ -15,7 +15,14 @@ dist["../client/dist/"] --> s3 --> client
 
 The `../client/dist/` directory is published to an S3 bucket that is hosted via CloudFront and Route53 at https://www.darkforest.click.
 
-## multiplayer
+## websocket server
+
+```mermaid
+flowchart LR
+dockerfile["./src/server/Dockerfile"] --> fargate --> client
+```
+
+The `Dockerfile` in `./src/server` is published to Fargate and exposed to the internet via CloudFront and Route53 at https://api.darkforest.click.
 
 ## reference
 
