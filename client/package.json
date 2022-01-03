@@ -2,8 +2,8 @@
   "data": {
     "input": {
       "colors": {
-        "primary": "#d6ecef",
         "debug": "#ff00ff",
+        "primary": "#d6ecef",
         "secondary": "#101010"
       },
       "hertz": 12,
