@@ -1,5 +1,97 @@
 # The Dark Forest: Client
 
+## Data
+
+The `data` object in `package.json` contains configuration values for the application.
+
+### `input`
+
+#### `colors`
+
+##### `debug`
+
+Used for visually debugging the game.
+
+##### `primary`
+
+The primary color of the game.
+
+##### `secondary`
+
+The secondary color of the game.
+
+#### `hertz`
+
+How many times per second is the game updated?
+
+#### `ids`
+
+##### `centeredContent`
+
+Identifies content that is vertically and horizontally centered on the page.
+
+##### `gameContainer`
+
+Identifies the parent container for the Phaser game instance.
+
+##### `postClickContent`
+
+Identifies content that should be shown after the first user interaction, but not before.
+
+##### `preClickContent`
+
+Identifies content that should be shown before the first user interaction, but not after.
+
+##### `viewportContainer`
+
+Identifies the top-level container for UI elements.
+
+#### `player`
+
+##### `radius`
+
+The radius of the circle that visually represents the player.
+
+##### `speed`
+
+The velocity at which the player moves.
+
+#### `trees`
+
+##### `horizontalSamples`
+
+How many samples should be taken in the horizontal axis?
+
+##### `maxRadius`
+
+The maximum radius for circles that visually represent trees.
+
+##### `minRadius`
+
+The minimum radius for circles that visually represent trees.
+
+##### `randomSeed`
+
+A random seed for the simplex noise generator. See the [simplex-noise](https://www.npmjs.com/package/simplex-noise) docs for more info about seeding the noise generator. See [this wikipedia page](https://en.wikipedia.org/wiki/Random_seed) for more information on random seeding in general.
+
+##### `sampleSpacing`
+
+How many pixels should separate each sample in the horizontal and vertical axes?
+
+##### `threshold`
+
+Controls how frequently trees spawn. This value can be any number between 0.0 and 1.0. Higher numbers will result in more trees being spawned.
+
+##### `verticalSamples`
+
+How many samples should be taken in the vertical axis?
+
+#### `urls`
+
+##### `server`
+
+The URL of the websocket server.
+
 ## Package Scripts
 
 ### `yarn build`
