@@ -1,5 +1,19 @@
 # service
 
+## data
+
+### input
+
+#### stacks
+
+##### client
+
+The name of [the client stack](https://github.com/benrosen/dark-forest/blob/b905c9196915740b3dde88b9ff77c1955f39616c/service/src/stacks/client.ts).
+
+##### service
+
+The name of [the service stack](https://github.com/benrosen/dark-forest/blob/b905c9196915740b3dde88b9ff77c1955f39616c/service/src/stacks/service.ts).
+
 ## package scripts
 
 ### `yarn deploy:client`
