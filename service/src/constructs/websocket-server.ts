@@ -33,7 +33,6 @@ export class WebSocketServer extends Construct {
     const certificate = Certificate.fromCertificateArn(
       this,
       "Cert",
-      // TODO get cert programmatically
       "arn:aws:acm:us-east-1:326238338403:certificate/79b300ec-8cb9-438f-89ff-3a1e8ceb0d12"
     );
     new ApplicationLoadBalancedFargateService(
