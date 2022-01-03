@@ -6,6 +6,9 @@
 
 Builds and deploys the entire project, including client code and infrastructure.
 
+### `yarn destroy`
+
+Destroys all infrastructure.
 
 ## Links
 
