@@ -2,9 +2,17 @@
 
 ## package scripts
 
-### `yarn cdk`
+### `yarn deploy:client`
 
-For more information on the `cdk` command, consult the [AWS CDK CLI reference materials](https://docs.aws.amazon.com/cdk/latest/guide/cli.html).
+Build and deploy the static site infrastructure for the client application.
+
+### `yarn deploy:service`
+
+Build and deploy the Docker container containing the WebSocket server to Fargate.
+
+### `yarn destroy`
+
+Destroy all cloud infrastructure.
 
 ## static site
 
