@@ -4,7 +4,8 @@
 
 ### `yarn deploy`
 
-Builds the code and then deploys CDK stacks.
+Builds and deploys the entire project, including client code and infrastructure.
+
 
 ## Links
 
