@@ -7,6 +7,21 @@ import { v4 } from "uuid";
 
 const { colors, hertz, ids, player, trees, urls } = data.input;
 
+/**
+ * The `Client` establishes and manages a connection with a WebSocket server
+ * and is responsible for sending and receiving network messages.
+ *
+ * The `Client` can send {@link PlayerState} updates
+ * and receive {@link GameState} updates.
+ * {@link PlayerState} updates are sent via the `publishPlayerState` method.
+ * {@link GameState} updates are passed to the `onGameStateReceived` callback function
+ * that is provided via {@link ClientProps}.
+ *
+ * For more information, see:
+ * - {@link ClientProps}
+ * - {@link GameState} and {@link PlayerState}
+ * - [MDN WebSocket Object Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+ */
 class Client {
   public readonly publishPlayerState: (state: PlayerState) => void;
   constructor(props: ClientProps) {
