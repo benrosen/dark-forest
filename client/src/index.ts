@@ -51,9 +51,12 @@ interface ClientProps {
  * {@link PlayerState} updates are passed to the `onLocalPlayerStateChanged` callback
  * that is provided via {@link GameProps}.
  *
+ * In-game logic is handled by the {@link Scene} class.
+ *
  * For more information, see:
  * - {@link GameProps}
  * - {@link GameState} and {@link PlayerState}
+ * - {@link Scene}
  * - [Phaser `EventEmitter` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Events.EventEmitter.html)
  * - [Phaser `Game.Config` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig)
  * - [MDN JavaScript `setter` Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
@@ -92,8 +95,6 @@ class Game {
  *
  * The `GameClient` receives {@link GameState} updates from the {@link Client}
  * and sends {@link PlayerState} updates back to the {@link Client}.
- *
- * In-game logic is handled by the {@link Scene} class.
  *
  * For more information, see:
  * - {@link GameClientProps}
