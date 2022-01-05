@@ -39,6 +39,25 @@ interface ClientProps {
   webSocketUrl: string;
 }
 
+/**
+ * The `Game` creates and manages a [Phaser.Game](https://photonstorm.github.io/phaser3-docs/Phaser.Game.html) instance
+ * and is responsible for passing state in and out of the game instance.
+ *
+ * The `Game` can receive {@link GameState} updates
+ * and send {@link PlayerState} updates.
+ * {@link GameState} updates are passed through the `public` `state` [setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
+ * to the game instance's [event system](https://photonstorm.github.io/phaser3-docs/Phaser.Events.EventEmitter.html)
+ * as {@link GameEvent.GameStateChanged} events.
+ * {@link PlayerState} updates are passed to the `onLocalPlayerStateChanged` callback
+ * that is provided via {@link GameProps}.
+ *
+ * For more information, see:
+ * - {@link GameProps}
+ * - {@link GameState} and {@link PlayerState}
+ * - [Phaser `EventEmitter` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Events.EventEmitter.html)
+ * - [Phaser `Game.Config` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig)
+ * - [MDN JavaScript `setter` Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
+ */
 class Game {
   private readonly _game: PhaserGame;
   public set state(value: GameState) {
