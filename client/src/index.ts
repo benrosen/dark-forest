@@ -87,6 +87,20 @@ class Game {
   }
 }
 
+/**
+ * The `GameClient` creates, manages, and connects a {@link Client} and a {@link Game}.
+ *
+ * The `GameClient` receives {@link GameState} updates from the {@link Client}
+ * and sends {@link PlayerState} updates back to the {@link Client}.
+ *
+ * In-game logic is handled by the {@link Scene} class.
+ *
+ * For more information, see:
+ * - {@link GameClientProps}
+ * - {@link GameState} and {@link PlayerState}
+ * - {@link Client} and {@link Game}
+ * - {@link Scene}
+ */
 class GameClient {
   private readonly _client: Client;
   private readonly _game: Game;
