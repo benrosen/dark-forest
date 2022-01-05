@@ -59,7 +59,6 @@ interface ClientProps {
  * - {@link Scene}
  * - [Phaser `EventEmitter` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Events.EventEmitter.html)
  * - [Phaser `Game.Config` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig)
- * - [MDN JavaScript `setter` Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
  */
 class Game {
   private readonly _game: PhaserGame;
