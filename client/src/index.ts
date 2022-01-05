@@ -156,6 +156,74 @@ interface Point {
 
 type Sample = Point & { value: number };
 
+/**
+ * The `Scene` creates and manages the game world,
+ * which includes the level, the local player, the camera, and the remote players.
+ *
+ * ## The forest
+ *
+ * The game takes place in an infinite 2D forest, which is viewed from above.
+ * The forest consists of trees, which are visually represented as circles.
+ * Tree circles are positioned randomly (but consistently) with the help of seeded simplex noise.
+ *
+ * Not all trees have the same diameter;
+ * the diameter of a tree circle is derived from the simplex noise value sampled at the tree's position.
+ * The sampled noise value is also used to determine whether a tree should be drawn at all.
+ *
+ * Because the game world is infinite, it contains an infinite number of trees.
+ * For performance reasons, only the trees nearest to the player are rendered.
+ * As the player moves around the world,
+ * tree game objects are dynamically created and destroyed as they come into and out of the player's view.
+ *
+ * The values that control tree spawning, tree diameter,
+ * and other configurable settings are defined in [package.json](https://github.com/benrosen/dark-forest/blob/0c0a05e0a787c0a860d1f93d08e26aeedb00a258/client/package.json)
+ * and documented in client directory's [README file](https://github.com/benrosen/dark-forest/blob/0c0a05e0a787c0a860d1f93d08e26aeedb00a258/client/README.md).
+ *
+ * ## The local player
+ *
+ * Players are visually represented as a circles that move around the level.
+ * The player game object is controlled by the arrow keys on the keyboard.
+ * Pressing arrow keys sets the velocity of the physics body attached to the player,
+ * which results in the player moving around the level.
+ *
+ * Physical collisions are enabled between the local player and the tree game objects
+ * via [Phaser's Arcade Physics Engine](https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.ArcadePhysics.html).
+ *
+ * The `Scene` broadcasts the {@link PlayerState} of the local player at an interval via the game's event system.
+ *
+ * Player diameter, speed, and other configurable settings are defined in
+ * [package.json](https://github.com/benrosen/dark-forest/blob/0c0a05e0a787c0a860d1f93d08e26aeedb00a258/client/package.json)
+ * and documented in client directory's [README file](https://github.com/benrosen/dark-forest/blob/0c0a05e0a787c0a860d1f93d08e26aeedb00a258/client/README.md).
+ *
+ * The game camera follows the position of the local player.
+ *
+ * ## The remote players
+ *
+ * Just like the local player, remote players are visually represented as circles that move around the level.
+ * However, unlike the local player, remote players are controlled by remote {@link PlayerState} objects.
+ * {@link PlayerState} objects hold position values, and are contained in {@link GameState} updates.
+ * {@link GameState} updates are received via the game's event system.
+ * Remote player game objects are constantly moved
+ * towards the position value contained in the most recently received {@link PlayerState} object.
+ *
+ * Remote player game objects do not collide with other game objects in the world, like trees or other players.
+ *
+ * Remote player game objects use the same configurable values as the local player game object,
+ * which are defined in [package.json](https://github.com/benrosen/dark-forest/blob/0c0a05e0a787c0a860d1f93d08e26aeedb00a258/client/package.json)
+ * and documented in client directory's [README file](https://github.com/benrosen/dark-forest/blob/0c0a05e0a787c0a860d1f93d08e26aeedb00a258/client/README.md).
+ *
+ * For more information, see:
+ * - {@link GameState} and {@link PlayerState}
+ * - {@link GameClient}
+ * - [Random Seed Wikipedia Article](https://en.wikipedia.org/wiki/Random_seed)
+ * - [Simplex Noise Wikipedia Article](https://en.wikipedia.org/wiki/Simplex_noise)
+ * - [`simplex-noise` Package Documentation](https://www.npmjs.com/package/simplex-noise)
+ * - [Phaser `circle` Documentation](https://newdocs.phaser.io/docs/3.54.0/focus/Phaser.GameObjects.GameObjectFactory-circle)
+ * - [Phaser "Cursor Keys" Example](https://phaser.io/examples/v3/view/input/keyboard/cursor-keys)
+ * - [Phaser "Circle Body" Example](https://phaser.io/examples/v2/arcade-physics/circle-body)
+ * - [Phaser `Camera.startFollow` Documentation](https://newdocs.phaser.io/docs/3.54.0/focus/Phaser.Cameras.Scene2D.Camera-startFollow)
+ * - [Phaser `EventEmitter` Documentation](https://photonstorm.github.io/phaser3-docs/Phaser.Events.EventEmitter.html)
+ */
 class Scene extends PhaserScene {
   private get _body() {
     return this._player.body as Phaser.Physics.Arcade.Body;
