@@ -9,7 +9,7 @@ import { AwsLogDriver, Cluster, ContainerImage } from "@aws-cdk/aws-ecs";
 import { Construct, Stack } from "@aws-cdk/core";
 
 import { ApplicationLoadBalancedFargateService } from "@aws-cdk/aws-ecs-patterns";
-import { Certificate } from "@aws-cdk/aws-certificatemanager";
+import { DnsValidatedCertificate } from "@aws-cdk/aws-certificatemanager";
 import { SslPolicy } from "@aws-cdk/aws-elasticloadbalancingv2";
 import { Vpc } from "@aws-cdk/aws-ec2";
 
@@ -30,11 +30,10 @@ export class WebSocketServer extends Construct {
       domainName: props.domainName,
     });
     const apiDomain = props.apiSubDomain + "." + props.domainName;
-    const certificate = Certificate.fromCertificateArn(
-      this,
-      "Cert",
-      "arn:aws:acm:us-east-1:326238338403:certificate/79b300ec-8cb9-438f-89ff-3a1e8ceb0d12"
-    );
+    const certificate = new DnsValidatedCertificate(this, "Cert", {
+      domainName: apiDomain,
+      hostedZone: domainZone,
+    });
     new ApplicationLoadBalancedFargateService(
       parent,
       "WebSocketServerFargateService",
