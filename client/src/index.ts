@@ -251,6 +251,7 @@ class Scene extends PhaserScene {
               getHexInteger(colors.secondary)
             )
             .setName(remotePlayerToCreate.id)
+            .setOrigin(0)
         )
       );
     this._remotePlayerStates
