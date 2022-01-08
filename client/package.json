@@ -6,7 +6,7 @@
         "primary": "#d6ecef",
         "secondary": "#101010"
       },
-      "hertz": 12,
+      "hertz": 24,
       "ids": {
         "centeredContent": "centered-content",
         "gameContainer": "game-container",
